@@ -1,0 +1,256 @@
+codigos feitos em www.sqliteonline.com
+
+criação de tabela
+
+CREATE TABLE tabelaclientes (
+  ID_Cliente INT PRIMARY KEY,
+  Nome_Cliente VARCHAR (250),
+  Informacoes_de_contato VARCHAR (250)
+  );
+  SELECT * FROM tabelaclientes; // select * from roda a tabela
+
+
+
+  nova tabela
+
+  create table tabelacategorias (
+  ID_Categoria INT PRIMARY KEY,
+  Nome_Categoria varchar (250),
+  Descricao_categoria text
+  )
+
+
+nova tabela, com chave externa da tabela de categorias e de fornecedores
+
+CREATE table tabelaprodutos (
+  ID_produto int primary key,
+  Nome_produto varchar (250),
+  Descricao_produto text,
+  Categoria int,
+  Preco_de_compra decimal (10,2),
+  Unidade varchar (50),
+  Fornecedor int,
+  Data_de_inclusao date,
+  foreign key (Categoria) references tabelacategorias (id_categoria)
+  FOREIGN key (Fornecedor) REFERENCES tabelafornecedores (id)
+  );
+
+
+  colocando dados na tabelaclientes
+
+  INSERT INTO tabelaclientes
+(id_cliente,
+ nome_cliente,
+ informacoes_de_contato,
+ endereço_cliente)
+ VALUES
+ ('1', 'Ana Silva', 'ana.silva@email.com', 'rua flores - casa 1');
+ SELECT * from tabelaclientes //rodando tabela para teste
+
+
+inserindo mais clientes
+
+ INSERT into tabelaclientes
+( id_cliente,
+ nome_cliente,
+ informacoes_de_contato,
+ endereço_cliente)
+ VALUES
+ ('2', 'Joao Santos', 'joao.santos@email.com', 'Rua dos pinheiros - nº 25'),
+ ('3', 'Raphael Nunes', 'raphael.nunes@email.com', 'Rua ediberto pelisari - nº 2'),
+ ('4', 'Adrieli Pereira', 'adrieli.pereira@email.com', 'Rua ediberto pelisari - n º2');
+ SELECT * FROM tabelaclientes; // rodando teste
+
+
+inserindo dados na tabelaprodutos
+
+INSERT into tabelaprodutos
+(id_produto,
+ nome_produto,
+ descricao_produto,
+ categoria,
+ preco_de_compra,
+ unidade,
+ fornecedor,
+ data_de_inclusao)
+ VALUES
+ ('1', 'Smartphone X', 'Smartphone de última geração', 1, 699.99, 'Unidade', 1, '2023-08-01'),
+ ('2', 'Notebook Pro', 'Notebook poderoso com tela HD', 2, 1199.99, 'Unidade', 2, '2023-08-02'),
+ ('3', 'Tablet Lite', 'Tablet compacto e leve', 3, 299.99, 'Unidade', 3, '2023-08-03');
+ SELECT * from tabelaprodutos;
+
+
+
+ criando nova tabela
+
+ create table pedidos_gold(
+  ID_pedido_gold int PRIMARY KEY,
+  Data_do_pedido_gold date,
+  Status_gold varchar (50),
+  Total_do_pedido_gold decimal (10,2),
+  Cliente_gold int,
+  Data_de_envio_estimado_gold date,
+  foreign key (cliente_gold) REFERENCES tabelaclientes(id_cliente)
+  );
+
+
+
+  exportando dados de uma tabela para outra
+
+  INSERT INTO pedidos_gold
+(id_pedido_gold,
+ data_do_pedido_gold,
+ status_gold,
+ total_do_pedido_gold,
+ cliente_gold,
+ data_de_envio_estimado_gold)
+ SELECT
+ id,
+ data_do_pedido,
+ status,
+ total_do_pedido,
+ cliente,
+ data_de_envio_estimada
+ from tabelapedidos //puxando da tabelapedidos
+ WHERE total_do_pedido >= 400 // selecionando pedidos acima de R$400,00
+
+
+
+ desafio
+
+ Uma empresa de RH precisa de um banco de dados para o cadastro de seus funcionarios
+
+ 1º passo
+
+ criação da tabela de funcionarios
+
+ create table tabelafuncionario(
+  ID int primary key,
+  Nome varchar (50),
+  Cargo varchar (50),
+  Departamento varchar (50),
+  Data_de_contratação date,
+  Salario decimal (10,2)
+  )
+
+  2º passo
+
+  insere os dados do funcionario na tabela
+
+  INSERT INTO tabelafuncionario(
+  ID,
+  Nome,
+  cargo,
+  departamento,
+  data_de_contratação,
+  salario)
+  VALUES
+  ('1', 'Joao Silva', 'Desenvolvedor de Software', 'TI', '2023-10-24', 6000)
+
+  3º passo
+
+  roda a tabela para teste
+
+  SELECT * FROM tabelafuncionario;
+
+  fim do desafio
+
+
+
+
+
+  voltando a aula
+
+rodas um filtro dentro da tabela de pedidos no valor ou acima de 200,00
+
+
+  SELECT * FROM tabelapedidos WHERE total_do_pedido >= 200;
+
+  obs: todos os operadores logicos podem ser usados para as pesquisas, mas o simbolo de diferente, deferente do JS onde usamos !=, usamos <>
+
+
+  para pesquisa de nomes
+
+  SELECT * FROM tabelaclientes WHERE nome_cliente > 'C' ;
+
+  assim, pesquisamos todos os nomes da letra C em diante, ignorando os com inicial A e B;
+  tambem podemos aplicar qualquer operador logico
+
+
+  para datas dos pedidos
+
+  SELECT * FROM tabelapedidos WHERE data_do_pedido > '2023-09-19'
+
+  assim puxando os resultados posteriores ao dia 19/09/2023
+
+
+  Filtros compostos
+
+  para consultar se temos alguma pedido dps da data de 2023-09-19, podemos usar operadores como AND, OR ou NOT 
+
+  assim ficando
+
+  SELECT * FROM tabelapedidos WHERE data_do_pedido > '2023-09-19' and status = 'Pendente'
+
+  retornando apenas o que estiver pedente
+
+  ou para valores
+
+  SELECT * FROM tabelapedidos WHERE total_do_pedido > 200 and status = 'Pendente'
+
+  para puxar os resultados de pedidos que estejam ou Pendentes, ou Processando
+
+  SELECT * FROM tabelapedidos WHERE status = 'Pendente' OR status = 'Processando';
+
+  e para puxar todos os resultados, menos o que estiver Pendente, podemos usar o 
+
+  SELECT * FROM tabelapedidos WHERE not status = 'Pendente';
+
+  para pesquisar dentro de um intervalo de tempo
+
+  SELECT * FROM tabelapedidos WHERE data_de_envio_estimada BETWEEN '2023-08-01' AND '2023-09-01';
+
+
+  para fazer uma pesquisa dentro de um intervalo e em ordem alfabetica, podemos utilizar
+
+  SELECT * FROM tabelaprodutos WHERE preco_de_compra BETWEEN 200 AND 600 ORDER BY nome_produto;
+
+obs: se alterarmos o nome_produto para id_produto, ele vai ordenar por ordem numerica e por valor_produto, vai ser do menor para o maior preso, e em data_de_inclusao vai puxar do mais antigo cadastrado para o mais rescente. Caso queiramos fazer em uma ordem descentente, mais rescente para o mais antigo, do maior pro menor, no fim ultilizamos o termo DESC.
+
+ex
+
+SELECT * FROM tabelaprodutos WHERE preco_de_compra BETWEEN 200 AND 600 ORDER BY nome_produto DESC;
+
+
+para mantes em ascentende, independente de qualquer coisa 
+
+SELECT * FROM tabelaprodutos WHERE preco_de_compra BETWEEN 200 AND 600 ORDER BY nome_produto ASC;
+
+
+para criar um apelido para uma coluna para melhor se localizar em um DB estranho a nosso dia a dia, usamos
+
+SELECT informacoes_de_contato AS email_cliente from tabelaclientes;
+
+no comando, apelidamos com o AS a coluna de informacoes_de_contato para email_cliente
+
+obs: isso nao renomei a coluna, somente apelida a consulta para melhor entendimento do data analist, e nomeamos esses apelidos como "Alias"
+
+
+para alterar os dados de uma determinada tabela, podemos usar 
+
+UPDATE tabelapedidos SET status = 'Enviado' WHERE status = 'Processando';
+
+onde UPDATE é a alteração, SET é para selecionar a coluna e colocar sua alteração, e WHERE seleciona a coluna e o atributo que sera substituido
+sendo assim, não termos mais nenhum pedido como 'Processando', todos foram alterados para 'Enviado'
+
+temos que tomar cuidado para não comer uma parte do codigo, e assim fazendo uma alteração em toda a DB e bagunçar todos os dados 
+
+
+para alteração em multiplas colunas, podemos usar uma virgula para separar os dados que alteraremos
+
+ex 
+
+
+UPDATE tabelaclientes SET informacoes_de_contato = 'j.santos@email.com', endereço_cliente = 'Rua dos paralelepipidos, 30'
+WHERE id_cliente = 2;
+

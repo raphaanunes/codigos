@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: black;
+    color: #f6f6f6;
+}
+.ex1 {
+    color: #46fe03;
+}
+.html-codigo{
+    color:azure
+}
+
+.titulo-blog{
+    margin: 20px;
+    color:chocolate;
+    font-size: 26px;
+}
+
+h4{
+    margin-top: 20px;
+}
+
+.urgente{
+    color: red;
+}
+
+.reset-box1{
+    border: 10px 10px solid black;
+    margin: 10px 10px;
+    padding: 10px 10px;
+    content: 10px 10px;
+    background-color:darkgray;
+    color:black;
+}
+.reset-box2{
+    border: 10px 10px solid black;
+    margin: 10px 10px;
+    padding: 10px 10px;
+    background-color: darkgray;
+    color: black;
+}
+
+.titulo{
+    font-size: 26px;
+    margin: 12px;
+}
+
+.resposta{
+    margin: 5px;
+    color: aquamarine;
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Enciclopedia DSR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header">
+            <h1>Enciclopedia DSR</h1>
+            <img src="/imagens/busca/agumonBusca.png" alt="Agumon Busca" class="agumonBusca">
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div class ="alinhamento">
+                <input id="place" type="text" placeholder="Procure por nome ou estagio" class="placeholder">
+                <button onclick="pesquisar()" id="button1">Pesquisar</button>
+            </div>
+        </section>
+
+        <section class="resultados-pesquisa" id="resultados-pesquisa">
+            
+        </section>
+    </main>
+
+    <footer>
+            <p>&copy 2024 - Raphael de A. Nunes</p>
+            <p>Entre em contato pelo e-mail: raphaanunes2@gmail.com</p>
+    </footer>
+
+    <script src="dados.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

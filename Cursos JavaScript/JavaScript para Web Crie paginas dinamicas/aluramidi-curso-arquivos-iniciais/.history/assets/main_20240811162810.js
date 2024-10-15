@@ -1,0 +1,3 @@
+function pom() {
+    alert('Pom')
+}

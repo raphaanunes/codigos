@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Jogador 1: Chris</p>
+    <style>p {
+        font-family: "helvetica neue", helvetica, sans-serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-align: center;
+        border: 2px solid orange;
+        background: greenyellow;
+        color: red;
+        box-shadow: 1px 1px 2px red;
+        border-radius: 10px;
+        padding: 3px 10px;
+        display: inline-block;
+        cursor: pointer;
+      }</style>
+      <script>const para = document.querySelector("p");
+
+        para.addEventListener("click", atualizarNome);
+        
+        function atualizarNome() {
+          var nome = prompt("Insira um novo nome");
+          para.textContent = "Jogador 1: " + nome;
+        }</script>
+      
+    
+</body>
+</html>

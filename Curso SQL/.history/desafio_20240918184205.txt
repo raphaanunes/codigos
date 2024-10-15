@@ -1,0 +1,111 @@
+1º passo
+
+create table tabelaalunos(
+  ID_aluno  int PRIMARY KEY,
+  Nome_aluno varchar (100),
+  data_nasc date,
+  genero varchar (100),
+  endereco varchar (100),
+  telefone_contato varchar (100),
+  email varchar (100)
+  )
+
+
+  2º passo
+
+  create table tabelaprofessores(
+  ID_professor int PRIMARY KEY,
+  Nome_professor varchar(100),
+  data_nasc varchar(100),
+  genero varchar(100),
+  telefone_contato varchar(100),
+  email varchar(100)
+  )
+
+
+3º passo
+
+CREATE table tabeladisciplinas(
+  ID_disciplina int PRIMARY KEY,
+  nome_disciplina varchar(100),
+  descricao text,
+  carga_horaria int,
+  id_professor int,
+  foreign key (id_professor) REFERENCES tabelaprofessores (id_professor)
+  );
+
+
+  4º passo
+
+  create table tabelaturmas(
+  id_turma int PRIMARY KEY,
+  nome_turma varchar(100),
+  ano_letivo date,
+  id_professor_orientador int,
+  FOREIGN key (id_professor_orientador) REFERENCES tabelaprofessores (id_professor)
+  );
+
+
+  5º passo
+
+  create table tabelaturma_disciplina(
+  id_turma int,
+  id_das_disciplinas int,
+  FOREIGN KEY (id_turma) REFERENCES tabelaturmas (id_turma),
+  FOREIGN KEY (id_das_disciplinas) references tabeladisciplinas (id_disciplina)
+  );
+
+
+  6º passo
+
+  CREATE table tabela_turma_alunos(
+  id_turma int,
+  id_aluno int,
+  FOREIGN KEY (id_turma) REFERENCES tabelaturmas (id_turma),
+  FOREIGN KEY (id_aluno) REFERENCES tabelaalunos (id_aluno)
+  );
+
+
+  7º passo
+
+  create table tabelanotas(
+  id_nota int,
+  id_aluno int,
+  id_disciplina int,
+  valor_nota float,
+  data_avaliacao date,
+  FOREIGN KEY (id_aluno) REFERENCES tabelaalunos (id_aluno),
+  FOREIGN KEY (id_disciplina) REFERENCES tabeladisciplinas (id_disciplina)
+  );
+
+
+
+  8º passo
+
+insert into tabelaalunos
+ (id_aluno,
+ nome_aluno,
+ data_nasc,
+ genero,
+ endereco,
+ telefone_contato,
+ email)
+ VALUES
+ ('1', 'João Silva', '2005-03-15', 'Masculino', 'Rua das Flores, 123', '(11) 99876-5432', 'joao@email.com'),
+ ('2', 'Maria Santos', '2006-06-20', 'Feminino', 'Avenida Principal, 456', '(11) 98765-4321', 'maria@email.com'),
+ ('3', 'Pedro Soares', '2004-01-10', 'Masculino', 'Rua Central, 789', '(11) 97654-3210', 'pedro@email.com'),
+ ('4', 'Ana Lima', '2005-04-02', 'Feminino', 'Rua da Escola, 56', '(11) 98765-4321', 'ana@email.com'),
+ ('5', 'Mariana Fernandes', '2005-08-12', 'Feminino', 'Avenida da Paz, 789', '(11) 95678-1234', 'mariana@email.com'),
+ ('6', 'Lucas Costa', '2003-11-25', 'Masculino', 'Rua Principal, 456', '(11) 91234-5678', 'lucas@email.com'),
+ ('7', 'Isabela Santos', '2006-09-10', 'Feminino', 'Rua da Amizade, 789', '(11)99876-5432', 'isabela@email.com'),
+ ('8', 'Gustavo Pereira', '2004-05-15', 'Masculino', 'Avenida dos Sonhos, 123', '(11) 97654-3210', 'gustavo@email.com'),
+ ('9', 'Caroline Oliveira', '2005-02-20', 'Feminino', 'Rua da Alegria, 456', '(11) 98765-4321', 'carolina@email.com'),
+ ('10', 'Daniel Silva', '2005-07-30', 'Masculino', 'Avenida Central, 789', '(11) 91234-5678', 'daniel@email.com'),
+ ('11', 'Larissa Souza', '2004-12-08', 'Feminino', 'Rua da Felicidade, 123', '(11) 99876-5432', 'larissa@email.com'),
+ ('12', 'Bruno Costa', '2005-07-30', 'Masculino', 'Avenida Principal, 456', '(11) 97654-3210', 'bruno@email.com'),
+ ('13', 'Camila Rodrigues', '2006-03-22', 'Feminino', 'Rua das Estrelas, 789', '(11) 98765-4321', 'camila@email.com'),
+ ('14', 'Rafael Fernandes', '2004-11-18', 'Masculino', 'Avenida dos Sonhos, 123', '(11) 91234-5678', 'rafael@email.com'),
+ ('15', 'Letícia Oliveira', '2005-01-05', 'Feminino', 'Rua da Alegria, 456', '(11) 99876-5432', 'leticia@email.com'),
+ ('16', 'Fernanda Lima', '2005-01-05', 'Feminino', 'Rua da Esperança, 789', '(11) 94567-8901', 'fernanda@email.com'),
+ ('17', 'Vinícius Santos', '2003-07-28', 'Masculino', 'Avenida da Amizade, 123', '(11) 98901-2345', 'vinicius@email.com'),
+ ('18', 'Juliana Pereira', '2006-09-01', 'Feminino', 'Rua das Rosas, 789', '(11) 93456-7890', 'juliana@email.com');
